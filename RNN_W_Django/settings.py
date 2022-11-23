@@ -117,3 +117,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MODEL_ROOT = os.path.join(BASE_DIR, "models")
+FOREST = {
+   'FOREST_URL': 'https://api.forestadmin.com',
+   'FOREST_ENV_SECRET': 'd3108507b5fe513af506937b69fabcc74864e515cd5f5dae1f5b43d8f2509071',
+   'FOREST_AUTH_SECRET': '2b3f1e35e78f4ca8c484bfcc6468e233ffccc5cd7394ceab'
+}
+APPEND_SLASH=False
