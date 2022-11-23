@@ -1,0 +1,52 @@
+{% load static %}
+
+<section class="border-bottom">
+    <!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center my-5">
+                        <h1 class="display-5 fw-bolder text-white mb-2 text-uppercase">Heat Stress Assessment Recognition using Gated Recurrent Unit</h1>
+                        <p class="lead text-white-50 mb-4">The RNN model is implemented using keras, tensorflow framework as backend with {{ data.score }}99% of accuracy and 0.0002 mean square error</p>
+                        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'PredApp:prediction' %}">Predict Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="bg-primary bg-gradient text-white rounded-3 mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                    <i class="fas fa-ruler" style="font-size: 48px;"></i>
+                </div>
+                <h2 class="h4 fw-bolder">Mean Radiant Temperature</h2>
+                <p>
+                    The mean radiant temperature (MRT) is defined as the uniform temperature of an imaginary enclosure in which the radiant heat transfer from the human body is equal to the radiant heat transfer in the actual non-uniform enclosure.
+                </p>
+            </div>
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="bg-primary bg-gradient text-white rounded-3 mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                    <i class="fas fa-weight" style="font-size: 48px;"></i>
+                    </div>
+                <h2 class="h4 fw-bolder">Physiological Equivalent Temperature</h2>
+                <p>
+                    PET is defined as the air temperature at which, in a typical indoor setting (without wind and solar radiation), the heat budget of the human body is balanced with the same core and skin temperature as under the complex outdoor conditions to be assessed.
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <div class="bg-primary bg-gradient text-white rounded-3 mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                    <i class="fas fa-chevron-circle-down" style="font-size: 48px;"></i>
+                </div>
+                <h2 class="h4 fw-bolder">Predicted Mean Vote</h2>
+                <p>
+                    The predicted mean vote (PMV) was developed by Povl Ole Fanger at Kansas State University and the Technical University of Denmark as an empirical fit to the human sensation of thermal comfort. It was later adopted as an ISO standard.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

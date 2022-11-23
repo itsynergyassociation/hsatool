@@ -1,0 +1,290 @@
+{% extends 'PredApp/base.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- Contact section-->
+    <section class="bg-light">
+        <div class="container px-5 my-5 px-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">Change scales ...</h2>
+            </div>
+            <nav>
+                <div class="justify-content-center nav nav-tabs" id="nav-tab" role="tablist">
+                    <button style="width: 18%" class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">TMRT</button>
+                    <button style="width: 18%"  class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">PMV</button>
+                    <button style="width: 18%"  class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">PET</button>
+                </div>
+            </nav>
+            <div class="tab-content py-5" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <form id="features" method="POST" style="margin-left: 10%">
+                         {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-lg-6" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="vlow" style="width: 40%">Very Low</label>
+                                <label class="input-group-text" for="vlow" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form1.vlow }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #fbf7b2; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                         <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="low" style="width: 40%">Low</label>
+                                <label class="input-group-text" for="low" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form1.low }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #f8f284; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="medium" style="width: 40%">Medium</label>
+                                <label class="input-group-text" for="medium" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form1.medium }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #f3ea52; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="high" style="width: 40%">High</label>
+                                <label class="input-group-text" for="high" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form1.high }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #f8ec17; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="vhigh" style="width: 40%">Very High</label>
+                                <label class="input-group-text" for="vhigh" style="border: transparent"> <i class="fas fa-greater-than"></i> </label>
+                                {{ form1.vhigh }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #edba04; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <hr  style="width: 50%"/>
+
+                        <div class="row" style="margin-top: 30px; margin-left: 5%;">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary btn-sm" style="font-weight: bolder; width: 200px; height: 40px;">Save</button>
+                                <button type="button" onclick="writeInTMRTFields()" class="btn btn-danger btn-sm" style="font-weight: bolder; width: 200px; height: 40px;">Reset to default</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <form id="features" method="POST" style="margin-left: 10%">
+                         {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-lg-6" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="hot" style="width: 40%">Hot</label>
+                                <label class="input-group-text" for="hot" style="border: transparent"> <i class="fas fa-greater-than"></i> </label>
+                                {{ form2.hot }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #f97555; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                         <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="warm" style="width: 40%">Warm</label>
+                                <label class="input-group-text" for="warm" style="border: transparent"> <i class="fas fa-greater-than"></i> </label>
+                                {{ form2.warm }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #fb937a; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="slwarm" style="width: 40%">Slightly warm</label>
+                                <label class="input-group-text" for="slwarm" style="border: transparent"> <i class="fas fa-greater-than"></i> </label>
+                                {{ form2.slwarm }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #cef4fa; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="neutral" style="width: 40%">Neutral</label>
+                                <label class="input-group-text" for="neutral" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form2.neutral }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #10f4d0; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="slcool" style="width: 40%">Slightly cool</label>
+                                <label class="input-group-text" for="slcool" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form2.slcool }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #28cbee; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="cool" style="width: 40%">Cool</label>
+                                <label class="input-group-text" for="cool" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form2.cool }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #76a0e8; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="cold" style="width: 40%">Cold</label>
+                                <label class="input-group-text" for="cold" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form2.cold }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #4582eb; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                         </div>
+
+
+                        <hr  style="width: 50%"/>
+
+                        <div class="row" style="margin-top: 30px; margin-left: 5%;">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary btn-sm" style="font-weight: bolder; width: 200px; height: 40px;">Save</button>
+                                <button type="button" onclick="writeInPMVFields()" class="btn btn-danger btn-sm" style="font-weight: bolder; width: 200px; height: 40px;">Reset to default</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <form id="features" method="POST" style="margin-left: 10%">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-lg-6" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="vcold" style="width: 40%">Very Cold</label>
+                                <label class="input-group-text" for="vcold" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form3.vcold }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #4582eb; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="petcold" style="width: 40%">Cold</label>
+                                <label class="input-group-text" for="petcold" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form3.petcold }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #6997e7; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="petcool" style="width: 40%">Cool</label>
+                                <label class="input-group-text" for="petcool" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form3.petcool }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #8cc6f0; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="petslcool" style="width: 40%">Slightly Cool</label>
+                                <label class="input-group-text" for="petslcool" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form3.petslcool }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #69dfe7; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="comfort" style="width: 40%">Comfortable</label>
+                                <label class="input-group-text" for="comfort" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form3.comfort }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #cef4fa; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="petslwarm" style="width: 40%">Slightly Warm</label>
+                                <label class="input-group-text" for="petslwarm" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form3.petslwarm }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #fb937a; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="petwarm" style="width: 40%">Warm</label>
+                                <label class="input-group-text" for="petwarm" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form3.petwarm }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #f97555; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <div class="row py-2">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="pethot" style="width: 40%">Hot</label>
+                                <label class="input-group-text" for="pethot" style="border: transparent"> <i class="fas fa-less-than"></i> </label>
+                                {{ form3.pethot }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #fd552c; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6"  style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="vhot" style="width: 40%">Very Hot</label>
+                                <label class="input-group-text" for="vhot" style="border: transparent"> <i class="fas fa-greater-than"></i> </label>
+                                {{ form3.vhot }}
+                                &nbsp;&nbsp; <button type="button" class="btn btn-sm" style="background-color: #e01607; font-weight: bolder; width: 150px; height: 32px;">      </button>
+                            </div>
+                        </div>
+
+                        <hr  style="width: 50%" />
+
+                        <div class="row" style="margin-top: 30px; margin-left: 5%;">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary btn-sm" style="font-weight: bolder; width: 200px; height: 40px;">Save</button>
+                                <button type="button" onclick="writeInPETFields()" class="btn btn-danger btn-sm" style="font-weight: bolder; width: 200px; height: 40px;">Reset to default</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+f
+    <script>
+        function writeInTMRTFields() {
+            document.getElementById("vlow").value = 10;
+            document.getElementById("low").value = 15;
+            document.getElementById("medium").value = 40;
+            document.getElementById("high").value = 55;
+            document.getElementById("vhigh").value = 55;
+        }
+
+        function writeInPMVFields() {
+            document.getElementById("hot").value = 3;
+            document.getElementById("warm").value = 2;
+            document.getElementById("slwarm").value = 1;
+            document.getElementById("neutral").value = 0;
+            document.getElementById("slcool").value = -1;
+            document.getElementById("cool").value = -2;
+            document.getElementById("cold").value = -3;
+        }
+
+        function writeInPETFields() {
+            document.getElementById("vcold").value = 4;
+            document.getElementById("petcold").value = 8;
+            document.getElementById("petcool").value = 13;
+            document.getElementById("petslcool").value = 18;
+            document.getElementById("comfort").value = 23;
+            document.getElementById("petslwarm").value = 29;
+            document.getElementById("petwarm").value = 35;
+            document.getElementById("pethot").value = 41;
+            document.getElementById("vhot").value = 41;
+        }
+    </script>
+{% endblock %}

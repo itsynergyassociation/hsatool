@@ -1,0 +1,44 @@
+{% extends 'PredApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="bg-light">
+    <div class="container px-5 my-5 px-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bolder">History</h2>
+        </div>
+
+        <table class="py-5 table  table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Global radiation (W/m<sup>2</sup>)</th>
+                    <th>Surface temperature (°C)</th>
+                    <th>Air temperature (°C)</th>
+                    <th>Relative Humidity (%)</th>
+                    <th>Wind speed (m/s)</th>
+                    <th>Tmrt (°C)</th>
+                    <th>PMV</th>
+                    <th>PET (°C)</th>
+                </tr>
+            </thead>
+                {% for history in histories %}
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{history.id}}</th>
+                            <td>{{history.Global_radiation}}</td>
+                            <td>{{history.Surface_temperature}}</td>
+                            <td>{{history.Air_temperature}}</td>
+                            <td>{{history.Relative_Humidity}}</td>
+                            <td>{{history.Wind_speed}}</td>
+                            <td style="background-color: {{ history.TmrtColor }}">{{history.Tmrt | floatformat:4}}</td>
+                            <td style="background-color: {{ history.PMVColor }}">{{history.PMV | floatformat:4}}</td>
+                            <td style="background-color: {{ history.PETColor }}">{{history.PET | floatformat:4}}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+</section>
+{% endblock %}
