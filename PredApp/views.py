@@ -6,7 +6,7 @@ from django.conf import settings
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from django.contrib.auth.models import User
-import tensorflow as tf
+#import tensorflow as tf
 import numpy as np
 import pandas as pd
 import keras
