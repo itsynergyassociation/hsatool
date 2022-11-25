@@ -11,7 +11,7 @@ SECRET_KEY = '4ms--mdunu8hz(#a6^v&9s3%peznsl^agvc(_tlat*$w5+1d%k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -59,10 +59,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'RNN_W_Django.wsgi.application'
 
 DATABASES = {
- #   'default': {
- #      'ENGINE': 'django.db.backends.sqlite3',
- #       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
- #   }
+    'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
