@@ -14,6 +14,8 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
+CSRF_TRUSTED_ORIGINS = ['https://hsa-tool.com','https://hsa-tool.azurewebsites.net']
+
 # Application definition
 
 INSTALLED_APPS = [
