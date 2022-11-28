@@ -11,7 +11,7 @@ SECRET_KEY = '4ms--mdunu8hz(#a6^v&9s3%peznsl^agvc(_tlat*$w5+1d%k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'PredApp',
     'widget_tweaks',
 ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,7 +61,7 @@ WSGI_APPLICATION = 'RNN_W_Django.wsgi.application'
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
@@ -103,14 +104,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
-#STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
-# STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-# 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MODEL_ROOT = os.path.join(BASE_DIR, "models")
-
