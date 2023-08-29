@@ -20,7 +20,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 simulations = pd.DataFrame()
 for f in glob.glob("Dataset/*.xlsx"):
     df = pd.read_excel(f, parse_dates=['time'])
-    simulations = simulations.append(df, ignore_index=True)
+    simulations = pd.concat([simulations, df], ignore_index=True)
 
 simulations['time'] = pd.to_datetime(simulations['time'], errors='coerce')
 simulations['time'] = pd.Index(simulations['time'])
