@@ -6,17 +6,23 @@ from django.conf import settings
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from django.contrib.auth.models import User
-#import tensorflow as tf
 import numpy as np
 import pandas as pd
 import keras
 import os
 import glob
-import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+from django.core.cache import cache
 
-# loading and scaling data
+def load_keras_model():
+    print("Keras model loading.......")
+    model_name = 'simul_model.h5'
+    loaded_model = keras.models.load_model(os.path.join(settings.MODEL_ROOT, model_name))
+    print("Model loaded !!")
+    return loaded_model
+
+
 simulations = pd.DataFrame()
 for f in glob.glob("Dataset/*.xlsx"):
     df = pd.read_excel(f, parse_dates=['time'])
@@ -41,18 +47,8 @@ Y_scaler = MinMaxScaler()
 Y_train_scaled = Y_scaler.fit_transform(Y_Train)
 Y_test_scaled = Y_scaler.transform(Y_Test)
 
-# loading our trained model
-print("Keras model loading.......")
-
-model_name = 'simul_model.h5'
-loaded_model = keras.models.load_model(os.path.join(settings.MODEL_ROOT, model_name))
-
-print("Model loaded !!")
-
-
 def home(request):
     return render(request, 'PredApp/home.html')
-
 
 class Predictions(View):
     def get(self, *args, **kwargs):
@@ -65,21 +61,24 @@ class Predictions(View):
         }
 
         return render(self.request, 'PredApp/predictions.html', context)
-
+    
     def post(self, *args, **kwargs):
         if self.request.method == 'POST':
             tmrtUser = TMRTParams.objects.filter(user=self.request.user).last()
             pmvUser = PMVParams.objects.filter(user=self.request.user).last()
             petUser = PETParams.objects.filter(user=self.request.user).last()
             form = PredictForm(self.request.POST)
-
+            loaded_model = cache.get('keras_model')
+            if loaded_model is None:
+                loaded_model = load_keras_model()
+                cache.set('keras_model', loaded_model, timeout=None)
+            
             if form.is_valid():
                 Global_radiation = form.cleaned_data.get('Global_radiation')
                 Surface_temperature = form.cleaned_data.get('Surface_temperature')
                 Air_temperature = form.cleaned_data.get('Air_temperature')
                 Relative_Humidity = form.cleaned_data.get('Relative_Humidity')
                 Wind_speed = form.cleaned_data.get('Wind_speed')
-
                 x_input = np.array([[
                     float(Global_radiation), float(Surface_temperature),
                     float(Air_temperature), float(Relative_Humidity),
@@ -91,7 +90,6 @@ class Predictions(View):
                 yhat = yhat.reshape((yhat.shape[0], 3))
                 yhat = Y_scaler.inverse_transform(yhat)
                 result = yhat
-
                 temper = PredictModel(
                     Global_radiation=Global_radiation,
                     # Thermal_radiation=Thermal_radiation,
